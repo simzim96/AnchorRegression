@@ -12,9 +12,9 @@
 #' data(example)
 #' output_table <- anchor_regression(x, anchor, gamma, target_variable)
 #' @export
-#' @importFrom glmnet "glmnet"
-#' @importFrom glmnet "cv.glmnet"
+#' @importFrom glmnet glmnet cv.glmnet
 
+library(glmnet)
 
 anchor_regression <- function(x, anchor, gamma, target_variable){
   x <- as.matrix(x)
