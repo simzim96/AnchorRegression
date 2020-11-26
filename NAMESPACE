@@ -3,3 +3,5 @@
 export()
 importFrom(glmnet,cv.glmnet)
 importFrom(glmnet,glmnet)
+importFrom(stats,coef)
+importFrom(stats,lm)

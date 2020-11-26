@@ -13,6 +13,8 @@
 #' output_table <- anchor_regression(x, anchor, gamma, target_variable)
 #' @export
 #' @importFrom glmnet glmnet cv.glmnet
+#' @importFrom stats coef lm
+
 
 library(glmnet)
 
