@@ -1,4 +1,3 @@
-library(AnchorRegression)
 
 
 x <- as.data.frame(matrix(data = rnorm(100),nrow = 100,ncol = 10))
