@@ -7,9 +7,9 @@
 anchor_regression(x, anchor, gamma, target_variable)
 }
 \arguments{
-\item{x}{x is a dataframe containing the matrix x}
+\item{x}{x is a dataframe containing the matrix x containing the independent variables}
 
-\item{anchor}{anchor is a dataframe containing the matrix anchor}
+\item{anchor}{anchor is a dataframe containing the matrix anchor containing the anchor variable}
 
 \item{gamma}{gamma is the regularization parameter for the Anchor Regression}
 
