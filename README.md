@@ -4,3 +4,7 @@ This is a package that implements the Anchor Regression developed by Dominik Rot
 The package is not approved by any authors of the paper.
 
 This package runs under the MIT License.
+
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.com/simzim96/AnchorRegression.svg?branch=master)](https://travis-ci.com/simzim96/AnchorRegression)
+<!-- badges: end -->
