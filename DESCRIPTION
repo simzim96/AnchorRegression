@@ -6,7 +6,7 @@ Author: Simon Zimmermann
 Maintainer: Simon Zimmermann <zimmersi@hu-berlin.de>
 Description: Performs AnchorRegression proposed by Rothenhäusler et al. 2020. 
     The code is adapted from the original paper repository https://github.com/rothenhaeusler/anchor-regression
-License: MIT License
+License: LICENSE
 URL: https://github.com/simzim96/AnchorRegression
 BugReports: https://github.com/simzim96/AnchorRegression/issues
 Depends:
