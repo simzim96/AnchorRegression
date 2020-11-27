@@ -14,8 +14,6 @@ Depends:
     R (>= 3.5.0)
 Imports:
     glmnet (>= 4.0-2)
-VignetteBuilder:
-    knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 Suggests: 
