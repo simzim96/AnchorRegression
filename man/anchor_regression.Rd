@@ -19,16 +19,13 @@ anchor_regression(x, anchor, gamma, target_variable)
 A list with coefficient values and a list with the respective names \code{overview_print}
 }
 \description{
-Perform an Anchor Regresseion as described in Rothenhäusler et al.2020
+Perform an Anchor Regression as described in Rothenhäusler et al.2020
 }
 \examples{
-x <- as.data.frame(matrix(data = rnorm(100),nrow = 10,ncol = 10))
-
-anchor <- as.data.frame(matrix(data = rnorm(20),nrow = 10,ncol = 2))
+x <- as.data.frame(matrix(data = rnorm(1000),nrow = 100,ncol = 10))
+anchor <- as.data.frame(matrix(data = rnorm(200),nrow = 100,ncol = 2))
 colnames(anchor) <- c('X1','X2')
 gamma <- 2
-
 target_variable <- 'V2'
-
 anchor_regression(x, anchor, gamma, target_variable)
 }

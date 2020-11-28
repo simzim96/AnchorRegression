@@ -1,6 +1,6 @@
 #' @title anchor_regression
 #'
-#' @description Perform an Anchor Regresseion as described in Rothenhäusler et al.2020
+#' @description Perform an Anchor Regression as described in Rothenhäusler et al.2020
 #'
 #' @param x x is a dataframe containing the matrix x containing the independent variables
 #' @param anchor anchor is a dataframe containing the matrix anchor containing the anchor variable
@@ -8,13 +8,17 @@
 #' @param target_variable target_variable is the target variable name contained in the x dataframe
 #'
 #' @return A list with coefficient values and a list with the respective names \code{overview_print}
-#' @examples
-#' data(example)
-#' output_table <- anchor_regression(x, anchor, gamma, target_variable)
 #' @export
 #' @importFrom glmnet glmnet cv.glmnet
 #' @importFrom stats coef lm
-#' @example man/examples/AnchorExample.R
+#' @examples
+#' x <- as.data.frame(matrix(data = rnorm(1000),nrow = 100,ncol = 10))
+#' anchor <- as.data.frame(matrix(data = rnorm(200),nrow = 100,ncol = 2))
+#' colnames(anchor) <- c('X1','X2')
+#' gamma <- 2
+#' target_variable <- 'V2'
+#' anchor_regression(x, anchor, gamma, target_variable)
+
 
 
 
