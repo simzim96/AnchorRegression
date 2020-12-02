@@ -13,4 +13,3 @@ This package runs under the MIT License.
 
 [![codecov](https://codecov.io/gh/simzim96/AnchorRegression/branch/master/graph/badge.svg?token=BPQQ90QPRI)](https://codecov.io/gh/simzim96/AnchorRegression)
 
-`r badge_cran("badger", "orange")`
