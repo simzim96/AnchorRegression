@@ -1,4 +1,4 @@
-x <- as.data.frame(matrix(data = rnorm(1000),nrow = 10,ncol = 10))
+x <- as.data.frame(matrix(data = rnorm(1000),nrow = 100,ncol = 10))
 
 anchor <- as.data.frame(matrix(data = rnorm(200),nrow = 100,ncol = 2))
 colnames(anchor) <- c('X1','X2')

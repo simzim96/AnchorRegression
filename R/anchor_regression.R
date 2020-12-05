@@ -27,8 +27,6 @@
 
 
 
-
-
 anchor_regression <- function(x, anchor, gamma, target_variable, lambda='CV'){
 
   # convert to matrix for lm
@@ -41,18 +39,18 @@ anchor_regression <- function(x, anchor, gamma, target_variable, lambda='CV'){
 
   # estimate ideal lambda penalization as proposed by CV or skip and use other
   if(lambda=='CV'){
-    newdata <- fit_const$fitted.values + fit$residuals
-    indices <- 1:nrow(newdata)
-    j <-  match( 'V2', colnames(newdata))
-    fit_glmnet <- cv.glmnet(x = newdata[indices,-c(j)],newdata[indices,j])
-    lambda_cv <- fit_glmnet$lambda.1se
+    cv_data <- fit_const$fitted.values + fit$residuals
+    indices <- 1:nrow(cv_data)
+    j <-  match( 'V2', colnames(cv_data))
+    fit_glmnet_lasso <- cv.glmnet(x = cv_data[indices,-c(j)],cv_data[indices,j])
+    lambda_cv <- fit_glmnet_lasso$lambda.1se
   }
   else{lambda_cv=lambda}
 
   # transform data for the Anchor Regression
-  newdata <- fit_const$fitted.values + fit$residuals + sqrt(gamma)*(fit$fitted.values-fit_const$fitted.values)
-  fit_glmnet_new <- glmnet(x = newdata[indices,-c(j)],newdata[indices,j],lambda = lambda_cv)
+  anchor_data <- fit_const$fitted.values + fit$residuals + sqrt(gamma)*(fit$fitted.values-fit_const$fitted.values)
+  fit_glmnet_anchor <- glmnet(x = anchor_data[indices,-c(j)],anchor_data[indices,j],lambda = lambda_cv)
 
-  return_list <- list(coeff = c(as.vector(coef(fit_glmnet_new))), names = c(colnames(newdata) ))
+  return_list <- list(coeff = c(as.vector(coef(fit_glmnet_anchor))), names = c(colnames(anchor_data) ))
   return(return_list)
 }
