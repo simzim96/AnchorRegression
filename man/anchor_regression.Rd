@@ -4,16 +4,18 @@
 \alias{anchor_regression}
 \title{anchor_regression}
 \usage{
-anchor_regression(x, anchor, gamma, target_variable)
+anchor_regression(x, anchor, gamma, target_variable, lambda = "CV")
 }
 \arguments{
-\item{x}{x is a dataframe containing the matrix x containing the independent variables}
+\item{x}{is a dataframe containing the matrix x containing the independent variables}
 
-\item{anchor}{anchor is a dataframe containing the matrix anchor containing the anchor variable}
+\item{anchor}{is a dataframe containing the matrix anchor containing the anchor variable}
 
-\item{gamma}{gamma is the regularization parameter for the Anchor Regression}
+\item{gamma}{is the regularization parameter for the Anchor Regression}
 
-\item{target_variable}{target_variable is the target variable name contained in the x dataframe}
+\item{target_variable}{is the target variable name contained in the x dataframe}
+
+\item{lambda}{indicates the lambda that is used in the Anchor Regression. 'CV' is used if it should be estimated by cross validation on the full subset.}
 }
 \value{
 A list with coefficient values and a list with the respective names \code{overview_print}

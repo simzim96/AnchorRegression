@@ -2,10 +2,11 @@
 #'
 #' @description Perform an Anchor Regression as described in Rothenhäusler et al.2020
 #'
-#' @param x x is a dataframe containing the matrix x containing the independent variables
-#' @param anchor anchor is a dataframe containing the matrix anchor containing the anchor variable
-#' @param gamma gamma is the regularization parameter for the Anchor Regression
-#' @param target_variable target_variable is the target variable name contained in the x dataframe
+#' @param x is a dataframe containing the matrix x containing the independent variables
+#' @param anchor is a dataframe containing the matrix anchor containing the anchor variable
+#' @param gamma is the regularization parameter for the Anchor Regression
+#' @param target_variable is the target variable name contained in the x dataframe
+#' @param lambda indicates the lambda that is used in the Anchor Regression. 'CV' is used if it should be estimated by cross validation on the full subset.
 #'
 #' @return A list with coefficient values and a list with the respective names \code{overview_print}
 #' @export
@@ -28,7 +29,7 @@
 
 
 
-anchor_regression <- function(x, anchor, gamma, target_variable){
+anchor_regression <- function(x, anchor, gamma, target_variable, lambda='CV'){
 
   # convert to matrix for lm
   x <- as.matrix(x)
@@ -38,12 +39,15 @@ anchor_regression <- function(x, anchor, gamma, target_variable){
   fit_const <- lm(x ~ 1)
   fit <- lm(x ~ anchor)
 
-  # estimate ideal lambda penalization as proposed by CV
-  newdata <- fit_const$fitted.values + fit$residuals
-  indices <- 1:nrow(newdata)
-  j <-  match( 'V2', colnames(newdata))
-  fit_glmnet <- cv.glmnet(x = newdata[indices,-c(j)],newdata[indices,j])
-  lambda_cv <- fit_glmnet$lambda.1se
+  # estimate ideal lambda penalization as proposed by CV or skip and use other
+  if(lambda=='CV'){
+    newdata <- fit_const$fitted.values + fit$residuals
+    indices <- 1:nrow(newdata)
+    j <-  match( 'V2', colnames(newdata))
+    fit_glmnet <- cv.glmnet(x = newdata[indices,-c(j)],newdata[indices,j])
+    lambda_cv <- fit_glmnet$lambda.1se
+  }
+  else{lambda_cv=lambda}
 
   # transform data for the Anchor Regression
   newdata <- fit_const$fitted.values + fit$residuals + sqrt(gamma)*(fit$fitted.values-fit_const$fitted.values)
