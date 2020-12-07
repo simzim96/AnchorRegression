@@ -7,6 +7,8 @@
 #' @param target_variable is the target variable name contained in the x dataframe
 #' @param lambda indicates the lambda that is used in the Anchor Regression. 'CV' is used if it should be estimated by cross validation on the full subset.
 #' @param alpha significance level for test decision on coefficient significance
+#' @param p_procedure procedure to estimate stability. Option 1: naive - stable if effect is non-zero in all cases; Option 2: post-lasso - post selection inference using SelectiveInference package
+
 #' @return A dataframe containing the stability values for each coefficient
 #' @export
 #' @importFrom glmnet glmnet cv.glmnet
