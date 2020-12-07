@@ -18,7 +18,7 @@ anchor_regression(x, anchor, gamma, target_variable, lambda = "CV")
 \item{lambda}{indicates the lambda that is used in the Anchor Regression. 'CV' is used if it should be estimated by cross validation on the full subset.}
 }
 \value{
-A list with coefficient values and a list with the respective names \code{overview_print}
+A list with coefficient values and a list with the respective names \code{overview_print}. Additionally the transformed data as x and y plus the fixed lambda coefficient.
 }
 \description{
 Perform an Anchor Regression as described in Rothenhäusler et al.2020

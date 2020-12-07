@@ -8,7 +8,7 @@
 #' @param target_variable is the target variable name contained in the x dataframe
 #' @param lambda indicates the lambda that is used in the Anchor Regression. 'CV' is used if it should be estimated by cross validation on the full subset.
 #'
-#' @return A list with coefficient values and a list with the respective names \code{overview_print}
+#' @return A list with coefficient values and a list with the respective names \code{overview_print}. Additionally the transformed data as x and y plus the fixed lambda coefficient.
 #' @export
 #' @importFrom glmnet glmnet cv.glmnet
 #' @importFrom stats coef lm
@@ -49,8 +49,12 @@ anchor_regression <- function(x, anchor, gamma, target_variable, lambda='CV'){
 
   # transform data for the Anchor Regression
   anchor_data <- fit_const$fitted.values + fit$residuals + sqrt(gamma)*(fit$fitted.values-fit_const$fitted.values)
-  fit_glmnet_anchor <- glmnet(x = anchor_data[indices,-c(j)],anchor_data[indices,j],lambda = lambda_cv)
+  indices <- 1:nrow(anchor_data)
+  j <-  match( 'V2', colnames(cv_data))
+  x <- anchor_data[indices,-c(j)]
+  y <- anchor_data[indices,j]
+  fit_glmnet_anchor <- glmnet(x = x,y = y,lambda = lambda_cv)
 
-  return_list <- list(coeff = c(as.vector(coef(fit_glmnet_anchor))), names = c(colnames(anchor_data) ))
+  return_list <- list(coeff = c(as.vector(coef(fit_glmnet_anchor))), names = c(colnames(anchor_data) ), x = x, y = y,lambda = lambda_cv, model = fit_glmnet_anchor )
   return(return_list)
 }

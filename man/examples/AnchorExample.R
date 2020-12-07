@@ -7,3 +7,4 @@ gamma <- 2
 target_variable <- 'V2'
 
 anchor_regression(x, anchor, gamma, target_variable)
+
