@@ -23,6 +23,8 @@ anchor_stability(
 \item{lambda}{indicates the lambda that is used in the Anchor Regression. 'CV' is used if it should be estimated by cross validation on the full subset.}
 
 \item{alpha}{significance level for test decision on coefficient significance}
+
+\item{p_procedure}{procedure to estimate stability. Option 1: naive - stable if effect is non-zero in all cases; Option 2: post-lasso - post selection inference using SelectiveInference package}
 }
 \value{
 A dataframe containing the stability values for each coefficient
@@ -36,5 +38,5 @@ anchor <- as.data.frame(matrix(data = rnorm(200),nrow = 100,ncol = 2))
 colnames(anchor) <- c('X1','X2')
 gamma <- 2
 target_variable <- 'V2'
-anchor_stability(x, anchor, target_variable, lambda, alpha=0.05)
+anchor_stability(x, anchor, target_variable, lambda, alpha=0.05, p_procedure = "naive")
 }

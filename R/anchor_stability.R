@@ -8,7 +8,6 @@
 #' @param lambda indicates the lambda that is used in the Anchor Regression. 'CV' is used if it should be estimated by cross validation on the full subset.
 #' @param alpha significance level for test decision on coefficient significance
 #' @param p_procedure procedure to estimate stability. Option 1: naive - stable if effect is non-zero in all cases; Option 2: post-lasso - post selection inference using SelectiveInference package
-
 #' @return A dataframe containing the stability values for each coefficient
 #' @export
 #' @importFrom glmnet glmnet cv.glmnet
@@ -20,7 +19,7 @@
 #' colnames(anchor) <- c('X1','X2')
 #' gamma <- 2
 #' target_variable <- 'V2'
-#' anchor_stability(x, anchor, target_variable, lambda, alpha=0.05)
+#' anchor_stability(x, anchor, target_variable, lambda, alpha=0.05, p_procedure = "naive")
 
 
 anchor_stability <- function(x, anchor, target_variable, lambda=0, alpha=0.05, p_procedure = "naive"){
