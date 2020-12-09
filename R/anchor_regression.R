@@ -28,6 +28,11 @@
 
 
 anchor_regression <- function(x, anchor, gamma, target_variable, lambda='CV'){
+  
+  # preliminary checks
+  if(ncol(x)<3){
+    print("unsufficient number of columns")
+  }
 
   # convert to matrix for lm
   x <- as.matrix(x)
