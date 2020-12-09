@@ -41,7 +41,7 @@ anchor_regression <- function(x, anchor, gamma, target_variable, lambda='CV'){
   if(lambda=='CV'){
     cv_data <- fit_const$fitted.values + fit$residuals
     indices <- 1:nrow(cv_data)
-    j <-  match( 'V2', colnames(cv_data))
+    j <-  match( target_variable, colnames(cv_data))
     fit_glmnet_lasso <- cv.glmnet(x = cv_data[indices,-c(j)],cv_data[indices,j])
     lambda_cv <- fit_glmnet_lasso$lambda.1se
   }
@@ -50,7 +50,7 @@ anchor_regression <- function(x, anchor, gamma, target_variable, lambda='CV'){
   # transform data for the Anchor Regression
   anchor_data <- fit_const$fitted.values + fit$residuals + sqrt(gamma)*(fit$fitted.values-fit_const$fitted.values)
   indices <- 1:nrow(anchor_data)
-  j <-  match( 'V2', colnames(cv_data))
+  j <-  match( target_variable, colnames(cv_data))
   x <- anchor_data[indices,-c(j)]
   y <- anchor_data[indices,j]
   fit_glmnet_anchor <- glmnet(x = x,y = y,lambda = lambda_cv)
