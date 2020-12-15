@@ -45,7 +45,6 @@ anchor_stability <- function(x, anchor, target_variable, lambda=0, alpha=0.05, p
 
     }else{p_inf=NULL}
 
-
     if(!is.null(p_0) | !is.null(p_inf)){
 
       result <- data.frame(anchor_gamma_0$names,"Not Stable")
