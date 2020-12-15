@@ -13,7 +13,7 @@ BugReports: https://github.com/simzim96/AnchorRegression/issues
 Depends:
     R (>= 2.0.0)
 Imports:
-    glmnet (>= 1.0),
+    glmnet (>= 1.4),
     selectiveInference (>= 1.0.0)
 Encoding: UTF-8
 RoxygenNote: 7.1.1

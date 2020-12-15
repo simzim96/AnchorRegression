@@ -28,7 +28,7 @@
 
 
 anchor_regression <- function(x, anchor, gamma, target_variable, lambda='CV'){
-  
+
   # preliminary checks
   if(ncol(x)<3){
     print("unsufficient number of columns")
@@ -55,7 +55,7 @@ anchor_regression <- function(x, anchor, gamma, target_variable, lambda='CV'){
   # transform data for the Anchor Regression
   anchor_data <- fit_const$fitted.values + fit$residuals + sqrt(gamma)*(fit$fitted.values-fit_const$fitted.values)
   indices <- 1:nrow(anchor_data)
-  j <-  match( target_variable, colnames(cv_data))
+  j <-  match( target_variable, colnames(anchor_data))
   x <- anchor_data[indices,-c(j)]
   y <- anchor_data[indices,j]
   fit_glmnet_anchor <- glmnet(x = x,y = y,lambda = lambda_cv)

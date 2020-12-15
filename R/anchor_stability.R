@@ -31,7 +31,7 @@ anchor_stability <- function(x, anchor, target_variable, lambda=0, alpha=0.05, p
   if(p_procedure == "naive"){
     stable <- ifelse(anchor_gamma_0$coeff!=0 & anchor_gamma_inf$coeff!=0,"stable", "not-stable")
     result <- data.frame(anchor_gamma_0$names,stable)
-    names(result) <- c("coefficient","anchor-stability")
+    names(result) <- c("coefficient","anchor_stability")
   }
   # Post lasso
   if(p_procedure == "post-lasso"){
@@ -45,8 +45,6 @@ anchor_stability <- function(x, anchor, target_variable, lambda=0, alpha=0.05, p
 
     }else{p_inf=NULL}
 
-    print(p_0==NULL)
-    print(p_inf==NULL)
 
     if(!is.null(p_0) | !is.null(p_inf)){
 
@@ -56,7 +54,7 @@ anchor_stability <- function(x, anchor, target_variable, lambda=0, alpha=0.05, p
       result <- data.frame(anchor_gamma_0$names,p_0,p_inf)
 
       colnames(result) <- c("coefficient","pv0","pvInf")
-      result$anchor-stability <- ifelse(result$pv0<alpha & result$pvInf<alpha,"stable","not_stable")
+      result$anchor_stability <- ifelse(result$pv0<alpha & result$pvInf<alpha,"stable","not_stable")
     }
   }
   return(result)
