@@ -60,6 +60,6 @@ anchor_regression <- function(x, anchor, gamma, target_variable, lambda='CV'){
   y <- anchor_data[indices,j]
   fit_glmnet_anchor <- glmnet(x = x,y = y,lambda = lambda_cv)
 
-  return_list <- list(coeff = c(as.vector(coef(fit_glmnet_anchor))), names = c('Intercept',c(colnames(anchor_data)[!colnames(anchor_data) %in% target_variable] )), x = x, y = y,lambda = lambda_cv, model = fit_glmnet_anchor )
+  return_list <- list(coeff = c(as.vector(coef(fit_glmnet_anchor))), names = c('Intercept',c(colnames(anchor_data)[!colnames(anchor_data) %in% target_variable] )), x = x, y = y,lambda = lambda_cv, model = fit_glmnet_anchor)
   return(return_list)
 }

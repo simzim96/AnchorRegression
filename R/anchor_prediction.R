@@ -5,11 +5,12 @@
 #' @param anchor_model is the Anchor Regression model object
 #' @param x is a dataframe containing the matrix x containing the independent variables
 #' @param anchor is a dataframe containing the matrix anchor containing the anchor variable
+#' @param gamma is the regularization parameter for the Anchor Regression
 #' @param target_variable is the target variable name contained in the x dataframe
 #'
 #' @return A list of predictions.
 #' @export
-#' @importFrom stats coef lm
+#' @importFrom stats coef lm predict
 #' @examples
 #' x <- as.data.frame(matrix(data = rnorm(100),nrow = 100,ncol = 10))
 #' anchor <- as.data.frame(matrix(data = rnorm(200),nrow = 100,ncol = 2))
@@ -17,10 +18,10 @@
 #' gamma <- 2
 #' target_variable <- 'V2'
 #' anchor_model <- anchor_regression(x, anchor, gamma, target_variable)
-#' anchor_prediction(anchor_model$model, x, anchor, target_variable)
+#' anchor_prediction(anchor_model$model, x, anchor, gamma, target_variable)
 
 
-anchor_prediction <- function(anchor_model, x, anchor, target_variable){
+anchor_prediction <- function(anchor_model, x, anchor, gamma, target_variable){
   # convert to matrix for lm
   x <- as.matrix(x)
   anchor <- as.matrix(anchor)

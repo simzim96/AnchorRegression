@@ -4,7 +4,7 @@
 \alias{anchor_prediction}
 \title{anchor_prediction}
 \usage{
-anchor_prediction(anchor_model, x, anchor, target_variable)
+anchor_prediction(anchor_model, x, anchor, gamma, target_variable)
 }
 \arguments{
 \item{anchor_model}{is the Anchor Regression model object}
@@ -12,6 +12,8 @@ anchor_prediction(anchor_model, x, anchor, target_variable)
 \item{x}{is a dataframe containing the matrix x containing the independent variables}
 
 \item{anchor}{is a dataframe containing the matrix anchor containing the anchor variable}
+
+\item{gamma}{is the regularization parameter for the Anchor Regression}
 
 \item{target_variable}{is the target variable name contained in the x dataframe}
 }
@@ -28,5 +30,5 @@ colnames(anchor) <- c('X1','X2')
 gamma <- 2
 target_variable <- 'V2'
 anchor_model <- anchor_regression(x, anchor, gamma, target_variable)
-anchor_prediction(anchor_model$model, x, anchor, target_variable)
+anchor_prediction(anchor_model$model, x, anchor, gamma, target_variable)
 }
