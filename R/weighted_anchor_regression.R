@@ -9,7 +9,7 @@
 #' @param anchor_model_pre is the pre estimated model for the Anchor Regression. In case of NULL a new model is estimated.
 #' @param test_split is desired test/train split for the estimation
 #'
-#' @return A list estimated coefficients with names and the raw coefficient matrix
+#' @return A list estimated coefficients with names, weights and the raw coefficient matrix
 #' @export
 #' @importFrom stats coef lm
 
@@ -61,7 +61,7 @@ weighted_anchor_regression <- function(data_x_list,data_anchor_list,gamma,target
   weighted_coefficients <- weights%*%t(coefficient_matrix)
 
   # return result
-  return_list = list(coeff = weighted_coefficients, names = anchor_model$names, raw_coeffs = coefficient_matrix)
+  return_list = list(coeff = weighted_coefficients, names = anchor_model$names, raw_coeffs = coefficient_matrix,weights = weights)
 
   return(return_list)
 }
