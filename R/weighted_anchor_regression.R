@@ -2,7 +2,7 @@
 #'
 #' @description Estimates weighted Anchor Regression coefficients
 #'
-#' @param data_x_list list containing anchor dataframes for different environments
+#' @param data_x_list list containing coefficient dataframes for different environments
 #' @param data_anchor_list list containing anchor dataframes for different environments
 #' @param gamma is the regularization parameter for the Anchor Regression
 #' @param target_variable is the target variable name contained in the x dataframe
