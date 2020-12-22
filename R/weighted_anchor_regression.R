@@ -2,7 +2,7 @@
 #'
 #' @description Estimates weighted Anchor Regression coefficients
 #'
-#' @param data_x_list list containing anchor dataframes for different environments
+#' @param data_x_list list containing coefficient dataframes for different environments
 #' @param data_anchor_list list containing anchor dataframes for different environments
 #' @param gamma is the regularization parameter for the Anchor Regression
 #' @param target_variable is the target variable name contained in the x dataframe
@@ -10,7 +10,7 @@
 #' @param test_split is desired test/train split for the estimation
 #' @param lambda penalization coefficient for Anchor Shrinkage. Initially set to 0.
 #'
-#' @return A list estimated coefficients with names and the raw coefficient matrix
+#' @return A list estimated coefficients with names, weights and the raw coefficient matrix
 #' @export
 #' @importFrom stats coef lm
 
@@ -62,7 +62,7 @@ weighted_anchor_regression <- function(data_x_list,data_anchor_list,gamma,target
   weighted_coefficients <- weights%*%t(coefficient_matrix)
 
   # return result
-  return_list = list(coeff = weighted_coefficients, names = anchor_model$names, raw_coeffs = coefficient_matrix)
+  return_list = list(coeff = weighted_coefficients, names = anchor_model$names, raw_coeffs = coefficient_matrix,weights = weights)
 
   return(return_list)
 }
