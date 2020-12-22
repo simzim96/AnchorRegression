@@ -10,7 +10,8 @@ weighted_anchor_regression(
   gamma,
   target_variable,
   anchor_model_pre = NULL,
-  test_split = 0.4
+  test_split = 0.4,
+  lambda = 0
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ weighted_anchor_regression(
 \item{anchor_model_pre}{is the pre estimated model for the Anchor Regression. In case of NULL a new model is estimated.}
 
 \item{test_split}{is desired test/train split for the estimation}
+
+\item{lambda}{penalization coefficient for Anchor Shrinkage. Initially set to 0.}
 }
 \value{
 A list estimated coefficients with names and the raw coefficient matrix

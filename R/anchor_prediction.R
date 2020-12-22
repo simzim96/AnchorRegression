@@ -34,7 +34,7 @@ anchor_prediction <- function(anchor_model, x, anchor, gamma, target_variable){
   j <-  match( target_variable, colnames(anchor_data))
   x <- anchor_data[indices,-c(j)]
 
-  # predictio
+  # prediction
   prediction <- predict(anchor_model,type="response", newx = x, s = 'lambda.min')
   return(prediction)
 }

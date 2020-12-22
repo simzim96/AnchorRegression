@@ -8,13 +8,14 @@
 #' @param target_variable is the target variable name contained in the x dataframe
 #' @param anchor_model_pre is the pre estimated model for the Anchor Regression. In case of NULL a new model is estimated.
 #' @param test_split is desired test/train split for the estimation
+#' @param lambda penalization coefficient for Anchor Shrinkage. Initially set to 0.
 #'
 #' @return A list estimated coefficients with names and the raw coefficient matrix
 #' @export
 #' @importFrom stats coef lm
 
 
-weighted_anchor_regression <- function(data_x_list,data_anchor_list,gamma,target_variable,anchor_model_pre=NULL,test_split=0.4){
+weighted_anchor_regression <- function(data_x_list,data_anchor_list,gamma,target_variable,anchor_model_pre=NULL,test_split=0.4, lambda=0){
 
   # initialize coefficient output matrix and patient score list
   coefficient_matrix <- NULL
@@ -38,7 +39,7 @@ weighted_anchor_regression <- function(data_x_list,data_anchor_list,gamma,target
 
     # estimate model if desired
     if(is.null(anchor_model_pre) ==TRUE){
-      anchor_model <- anchor_regression(train_x,train_anchor,gamma,target_variable)
+      anchor_model <- anchor_regression(train_x,train_anchor,gamma,target_variable,lambda)
     }else{
       anchor_model <- anchor_model_pre
     }
