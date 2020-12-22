@@ -15,7 +15,7 @@ weighted_anchor_regression(
 )
 }
 \arguments{
-\item{data_x_list}{list containing anchor dataframes for different environments}
+\item{data_x_list}{list containing coefficient dataframes for different environments}
 
 \item{data_anchor_list}{list containing anchor dataframes for different environments}
 
@@ -30,8 +30,33 @@ weighted_anchor_regression(
 \item{lambda}{penalization coefficient for Anchor Shrinkage. Initially set to 0.}
 }
 \value{
-A list estimated coefficients with names and the raw coefficient matrix
+A list estimated coefficients with names, weights and the raw coefficient matrix
 }
 \description{
 Estimates weighted Anchor Regression coefficients
+}
+\examples{
+   environments <- 10 # number of observed environments
+
+   # populate list with generated data of x and anchor
+   data_x_list <- c()
+   data_anchor_list <- c()
+   for(e in 1:environments){
+     x <- as.data.frame(matrix(data = rnorm(100),nrow = 100,ncol = 10))
+     anchor <- as.data.frame(matrix(data = rnorm(200),nrow = 100,ncol = 2))
+     colnames(anchor) <- c('X1','X2')
+     data_x_list[[e]] <- x
+     data_anchor_list[[e]]  <- anchor
+   }
+
+   # estimate model
+   gamma <- 2
+   target_variable <- 'V2'
+   weighted_anchor_regression(data_x_list,
+                              data_anchor_list,
+                              gamma,
+                              target_variable,
+                              anchor_model_pre=NULL,
+                              test_split=0.4,
+                              lambda=0)
 }

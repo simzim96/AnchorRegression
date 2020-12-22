@@ -30,7 +30,13 @@
 #'    # estimate model
 #'    gamma <- 2
 #'    target_variable <- 'V2'
-#'    weighted_anchor_regression(data_x_list,data_anchor_list,gamma,target_variable,anchor_model_pre=NULL,test_split=0.4, lambda=0)
+#'    weighted_anchor_regression(data_x_list,
+#'                               data_anchor_list,
+#'                               gamma,
+#'                               target_variable,
+#'                               anchor_model_pre=NULL,
+#'                               test_split=0.4,
+#'                               lambda=0)
 
 
 

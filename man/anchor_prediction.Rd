@@ -21,7 +21,7 @@ anchor_prediction(anchor_model, x, anchor, gamma, target_variable)
 A list of predictions.
 }
 \description{
-Perform a prediction for an Anchor Regression Model as described in Rothenhäusler et al.2020
+Perform a prediction for an Anchor Regression model as described in Rothenhäusler et al.2020
 }
 \examples{
 x <- as.data.frame(matrix(data = rnorm(100),nrow = 100,ncol = 10))

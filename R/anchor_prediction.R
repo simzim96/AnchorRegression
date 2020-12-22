@@ -1,6 +1,6 @@
 #' @title anchor_prediction
 #'
-#' @description Perform a prediction for an Anchor Regression Model as described in Rothenhäusler et al.2020
+#' @description Perform a prediction for an Anchor Regression model as described in Rothenhäusler et al.2020
 #'
 #' @param anchor_model is the Anchor Regression model object
 #' @param x is a dataframe containing the matrix x containing the independent variables

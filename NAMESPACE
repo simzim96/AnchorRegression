@@ -3,6 +3,7 @@
 export(anchor_prediction)
 export(anchor_regression)
 export(anchor_stability)
+export(weighted_anchor_prediction)
 export(weighted_anchor_regression)
 importFrom(glmnet,cv.glmnet)
 importFrom(glmnet,glmnet)
