@@ -1,7 +1,7 @@
 Package: AnchorRegression
 Type: Package
 Title: Perform AnchorRegression
-Version: 0.1.2
+Version: 0.1.3
 Author: Simon Zimmermann
 Maintainer: Simon Zimmermann <zimmersi@hu-berlin.de>
 Description: Performs AnchorRegression proposed by Rothenhäusler et al. 2020. 
