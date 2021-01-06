@@ -6,7 +6,8 @@
 #' @param anchor is a dataframe containing the matrix anchor containing the anchor variable
 #' @param gamma is the regularization parameter for the Anchor Regression
 #' @param target_variable is the target variable name contained in the x dataframe
-#' @param bin_factor binary variable that can be transformed to a factor to partial out effects
+#' @param bin_factor factor variable that can be transformed to a factor to partial out effects
+#' @param force_binary if set to TRUE forces bin_factor to be binary
 #'
 #' @return A list with coefficient values and a list with the respective names \code{overview_print}. Additionally the transformed data as x and y plus the fixed lambda coefficient.
 #' @export
@@ -22,7 +23,7 @@
 #' anchor_regression_gam(x, anchor, gamma, target_variable,bin_factor =  "bin")
 
 
-anchor_regression_gam <- function (x, anchor, gamma, target_variable, bin_factor = NULL) {
+anchor_regression_gam <- function (x, anchor, gamma, target_variable, bin_factor = NULL, force_binary = TRUE) {
   if (ncol(x) < 3) {
     print("unsufficient number of columns")
   }
@@ -54,28 +55,32 @@ anchor_regression_gam <- function (x, anchor, gamma, target_variable, bin_factor
   # generate formula
   if (is.null(bin_factor) != TRUE) {
           if(is.factor(x[, bin_factor])!=TRUE){
+            if(force_binary==TRUE){
+              x[bin_factor] <- as.factor(ifelse(round(x[, bin_factor]) >=1,1,0))
+            }else{
               x[bin_factor] <- as.factor(round(x[, bin_factor]))
+            }
           }
 
           vars_non_bin_fac <- vars_non_bin[!vars_non_bin %in% bin_factor]
           if (length(nuniq_names) != 0) {
               col <- paste0(", by=", bin_factor, ")+s(")
-              form <- paste(target_variable, "~ s(", paste(vars_non_bin_fac, 
+              form <- paste(target_variable, "~ s(", paste(vars_non_bin_fac,
                   collapse = col), ",by = ",bin_factor,")+", paste(nuniq_names, collapse = " + "))
           }
           else {
               col <- paste0(", by=", bin_factor, ")+s(")
-              form <- paste(target_variable, "~ s(", paste(vars_non_bin_fac, 
+              form <- paste(target_variable, "~ s(", paste(vars_non_bin_fac,
                   collapse = col),",by = ",bin_factor, ")")
           }
       } else {
           if (length(nuniq_names) != 0) {
-              form <- paste(target_variable, "~ s(", paste(vars_non_bin, 
-                  collapse = ") + s("), ")+", paste(nuniq_names, 
+              form <- paste(target_variable, "~ s(", paste(vars_non_bin,
+                  collapse = ") + s("), ")+", paste(nuniq_names,
                   collapse = " + "))
           }
           else {
-              form <- paste(target_variable, "~ s(", paste(vars_non_bin, 
+              form <- paste(target_variable, "~ s(", paste(vars_non_bin,
                   collapse = ") + s("), ")")
           }
       }
