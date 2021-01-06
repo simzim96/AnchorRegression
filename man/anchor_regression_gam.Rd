@@ -4,7 +4,14 @@
 \alias{anchor_regression_gam}
 \title{anchor_regression_gam}
 \usage{
-anchor_regression_gam(x, anchor, gamma, target_variable, bin_factor = NULL)
+anchor_regression_gam(
+  x,
+  anchor,
+  gamma,
+  target_variable,
+  bin_factor = NULL,
+  force_binary = TRUE
+)
 }
 \arguments{
 \item{x}{is a dataframe containing the matrix x containing the independent variables}
@@ -15,7 +22,9 @@ anchor_regression_gam(x, anchor, gamma, target_variable, bin_factor = NULL)
 
 \item{target_variable}{is the target variable name contained in the x dataframe}
 
-\item{bin_factor}{binary variable that can be transformed to a factor to partial out effects}
+\item{bin_factor}{factor variable that can be transformed to a factor to partial out effects}
+
+\item{force_binary}{if set to TRUE forces bin_factor to be binary}
 }
 \value{
 A list with coefficient values and a list with the respective names \code{overview_print}. Additionally the transformed data as x and y plus the fixed lambda coefficient.
