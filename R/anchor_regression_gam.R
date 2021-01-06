@@ -52,23 +52,33 @@ anchor_regression_gam <- function (x, anchor, gamma, target_variable, bin_factor
   vars_non_bin <- vars[!vars %in% nuniq_names]
 
   # generate formula
-  if(is.null(bin_factor) != TRUE){
-    x[bin_factor] <- as.factor(round(x[,bin_factor]))
-    vars_non_bin_fac <- vars_non_bin[!vars_non_bin %in% bin_factor]
-    if(length(nuniq_names) !=0){
-      col <- paste0(", by=",bin_factor, ")+s(")
-      form <- paste(target_variable, "~ s(", paste(vars_non_bin_fac, collapse=col),")+",paste(nuniq_names, collapse=" + "))
-    }else{
-      col <- paste0(", by=",bin_factor, ")+s(")
-      form <- paste(target_variable, "~ s(", paste(vars_non_bin_fac, collapse=col),")")
-    }
-  }else{
-    if(length(nuniq_names) !=0){
-      form <- paste(target_variable, "~ s(", paste(vars_non_bin, collapse=") + s("),")+",paste(nuniq_names, collapse=" + "))
-    }else{
-      form <- paste(target_variable, "~ s(", paste(vars_non_bin, collapse=") + s("),")")
-    }
-  }
+  if (is.null(bin_factor) != TRUE) {
+          if(is.factor(x[, bin_factor])!=TRUE){
+              x[bin_factor] <- as.factor(round(x[, bin_factor]))
+          }
+
+          vars_non_bin_fac <- vars_non_bin[!vars_non_bin %in% bin_factor]
+          if (length(nuniq_names) != 0) {
+              col <- paste0(", by=", bin_factor, ")+s(")
+              form <- paste(target_variable, "~ s(", paste(vars_non_bin_fac, 
+                  collapse = col), ",by = ",bin_factor,")+", paste(nuniq_names, collapse = " + "))
+          }
+          else {
+              col <- paste0(", by=", bin_factor, ")+s(")
+              form <- paste(target_variable, "~ s(", paste(vars_non_bin_fac, 
+                  collapse = col),",by = ",bin_factor, ")")
+          }
+      } else {
+          if (length(nuniq_names) != 0) {
+              form <- paste(target_variable, "~ s(", paste(vars_non_bin, 
+                  collapse = ") + s("), ")+", paste(nuniq_names, 
+                  collapse = " + "))
+          }
+          else {
+              form <- paste(target_variable, "~ s(", paste(vars_non_bin, 
+                  collapse = ") + s("), ")")
+          }
+      }
   # estimate model
   model <-  gam(as.formula(form),data=x, method = "REML")
 
