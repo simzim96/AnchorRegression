@@ -1,3 +1,26 @@
+#' @title anchor_stability
+#'
+#' @description Perform an Anchor Stability Analysis as described in Rothenhäusler et al.2020
+#'
+#' @param x is a dataframe containing the matrix x containing the independent variables
+#' @param anchor is a dataframe containing the matrix anchor containing the anchor variable
+#' @param target_variable is the target variable name contained in the x dataframe
+#' @param lambda indicates the lambda that is used in the Anchor Regression. 'CV' is used if it should be estimated by cross validation on the full subset.
+#' @param alpha significance level for test decision on coefficient significance
+#' @param p_procedure procedure to estimate stability. Option 1: naive - stable if effect is non-zero in all cases; Option 2: post-lasso - post selection inference using SelectiveInference package
+#' @return A dataframe containing the stability values for each coefficient
+#' @export
+#' @importFrom glmnet glmnet cv.glmnet
+#' @importFrom stats coef lm
+#' @importFrom selectiveInference fixedLassoInf
+#' @examples
+#' x <- as.data.frame(matrix(data = rnorm(1000),nrow = 100,ncol = 10))
+#' anchor <- as.data.frame(matrix(data = rnorm(200),nrow = 100,ncol = 2))
+#' colnames(anchor) <- c('X1','X2')
+#' gamma <- 2
+#' target_variable <- 'V2'
+#' anchor_stability(x, anchor, target_variable, lambda, alpha=0.05, p_procedure = "naive")
+
 anchor_stability <- function (x,
                               anchor,
                               target_variable,
