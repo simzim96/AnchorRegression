@@ -1,4 +1,4 @@
-function (x, 
+anchor_stability <- function (x, 
                               anchor, 
                               target_variable, 
                               lambda = 0, 
